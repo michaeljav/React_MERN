@@ -4,7 +4,7 @@ const name = 'Michael 2';
 export const App = ({ title, subTitle }) => {
   return (
     <>
-      <h1>Hello world22 {title}</h1>;
+      <h1>Hello world223 {title}</h1>;
     </>
   );
 };
