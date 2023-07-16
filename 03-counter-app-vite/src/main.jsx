@@ -1,13 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-// const App = () => {
-//   return <h1>Hello world</h1>;
-// };
-
-function App() {
-  return <h1>Hello world</h1>;
-}
+// import { App } from './HelloWorldApp';
+import App from './HelloWorldApp';
+import './styles.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
