@@ -7,4 +7,12 @@ describe('Prueba en 11-async-await ', () => {
     // console.log('Michael ', typeof url);
     expect(typeof url).toBe('string');
   });
+
+  test('getImagen debe de retornar un error sino tenemos api key', async () => {
+    const response = await getImagen();
+    // console.log(url);
+    // console.log('Michael ', typeof url);
+    expect( response).toBe(''No se encontró la imagen'');
+  });
+
 });
