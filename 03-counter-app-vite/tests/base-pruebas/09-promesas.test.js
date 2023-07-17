@@ -25,6 +25,7 @@ describe('Pruebas en 09-promesas', () => {
       owner: 'DC',
     };
     getHeroeByIdAsync(id)
+      // este no deberia de llamarse aqui por el objetivo de la prueba que es que venga vacio
       .then((hero) => {
         expect(hero).toBeFalsy();
         done();
