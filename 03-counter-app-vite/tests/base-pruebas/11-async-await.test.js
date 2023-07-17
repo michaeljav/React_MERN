@@ -12,7 +12,6 @@ describe('Prueba en 11-async-await ', () => {
     const response = await getImagen();
     // console.log(url);
     // console.log('Michael ', typeof url);
-    expect( response).toBe(''No se encontró la imagen'');
+    expect(response).toBe('No se encontró la imagen');
   });
-
 });
