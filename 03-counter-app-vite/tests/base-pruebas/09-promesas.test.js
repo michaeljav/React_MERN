@@ -9,7 +9,7 @@ describe('Pruebas en 09-promesas', () => {
       owner: 'DC',
     };
     getHeroeByIdAsync(id).then((hero) => {
-      console.log(hero);
+      // console.log(hero);
       expect(hero).toEqual(result);
       // expect(true).toBe(false);
       //to wait to finish
