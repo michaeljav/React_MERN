@@ -1,5 +1,12 @@
 import React from 'react';
 
 export const GifExpertApp = () => {
-  return <h1>GifExpertApp</h1>;
+  return (
+    <>
+      {/* TITULO */}
+      <h1>GifExpertApp</h1>;{/* INPUT */}
+      {/* LISTADO DE GIF */}
+      {/* GIF ITEM */}
+    </>
+  );
 };
