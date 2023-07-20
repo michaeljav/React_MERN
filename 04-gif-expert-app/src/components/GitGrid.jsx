@@ -2,18 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { getGifs } from '../helpers/getGifs';
 
 export const GitGrid = ({ category }) => {
-  const [state, setstate] = useState(10);
+  const [images, setImages] = useState([]);
+  const getImages = async () => {
+    const newImages = await getGifs(category);
+    setImages(newImages);
+  };
 
   useEffect(() => {
-    getGifs(category).then((tt) => console.log(tt));
-    // console.log(t);
-    // return () => {};
+    //fIRST OPTION
+    // getGifs(category).then((tt) => {
+    //   console.log(tt);
+    //   setImages(tt);
+    // });
+
+    //Second option
+    getImages();
   }, []);
 
   return (
     <>
       <h3>{category}</h3>
-      <div>HOLA</div>
+      <ol>
+        {images.map(({ id, title }) => (
+          <li key={id}>{title}</li>
+        ))}
+      </ol>
     </>
   );
 };
