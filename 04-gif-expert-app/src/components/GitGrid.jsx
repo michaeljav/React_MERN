@@ -2,24 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { GifItem } from './GifItem';
 
 import { getGifs } from '../helpers/getGifs';
+import { useFetchGifs } from '../hooks/useFetchGifs';
 
 export const GitGrid = ({ category }) => {
-  const [images, setImages] = useState([]);
-  const getImages = async () => {
-    const newImages = await getGifs(category);
-    setImages(newImages);
-  };
-
-  useEffect(() => {
-    //fIRST OPTION
-    // getGifs(category).then((tt) => {
-    //   console.log(tt);
-    //   setImages(tt);
-    // });
-
-    //Second option
-    getImages();
-  }, []);
+  const { images, isLoading } = useFetchGifs(category);
 
   return (
     <>
