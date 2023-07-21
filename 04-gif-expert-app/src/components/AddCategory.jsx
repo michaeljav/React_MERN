@@ -9,14 +9,16 @@ export const AddCategory = ({ onNewCategory }) => {
   };
 
   const onSubmit = (event) => {
+    // console.log('Hola mundo desde el submit');
     event.preventDefault();
+
     if (inputValue.trim().length <= 1) return;
     onNewCategory(inputValue);
     setInputValue('');
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} aria-label='form'>
       <input
         type='text'
         placeholder='Buscar gifs'

@@ -11,4 +11,17 @@ describe('Pruebas en <AddCategory/>', () => {
     expect(input.value).toBe('Saitama');
     screen.debug();
   });
+
+  test('debe de llamar onNewCategory si el input tiene un valor', () => {
+    const inputValue = 'Saitama';
+    render(<AddCategory onNewCategory={() => {}} />);
+    const input = screen.getByRole('textbox');
+    const form = screen.getByRole('form');
+
+    //cambiar el valor de la caja de texto
+    fireEvent.input(input, { target: { value: 'Saitama' } });
+    fireEvent.submit(form);
+    // screen.debug();
+    expect(input.value).toBe('');
+  });
 });
