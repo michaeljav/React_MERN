@@ -41,7 +41,7 @@ export const SimpleForms = () => {
         value={username}
         onChange={onInputChange}
       />
-      {username === 'michael2' && <Message />}
+      {username === 'michael1' && <Message />}
       <input
         type='email'
         className='form-control mt-2'
