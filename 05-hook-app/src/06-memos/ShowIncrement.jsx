@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { memo } from 'react';
 
 export const ShowIncrement = memo(({ increment }) => {
@@ -6,7 +7,7 @@ export const ShowIncrement = memo(({ increment }) => {
     <button
       className='btn btn-primary'
       onClick={() => {
-        increment();
+        increment(5);
       }}
     >
       Incrementar
