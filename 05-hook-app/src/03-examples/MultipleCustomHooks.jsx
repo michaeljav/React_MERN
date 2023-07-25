@@ -1,6 +1,11 @@
 import React from 'react';
-import { useFetch } from '../hooks/useFetch';
-import { useCounter } from '../hooks/useCounter';
+// import { useFetch } from '../hooks/useFetch';
+// import { useCounter } from '../hooks/useCounter';
+
+import { Quote, LoadingQuote } from './';
+import { useFetch, useCounter } from '../hooks/';
+// import { LoadingQuote } from './LoadingQuote';
+// import { Quote } from './Quote';
 
 export const MultipleCustomHooks = () => {
   const { counter, increment } = useCounter(1);
@@ -10,19 +15,12 @@ export const MultipleCustomHooks = () => {
 
   //si la data tiene un valor entoncers toma la data en la posicion 0
   const { author, quote } = !!data && data[0];
-  console.log({ data, isLoading, hasError });
+  // console.log({ data, isLoading, hasError });
   return (
     <>
       <h1>BreakingBad Quotes</h1>
       <hr />
-      {isLoading ? (
-        <div className='alert alert-info text-center'>Loading</div>
-      ) : (
-        <blockquote className='blockquote text-end'>
-          <p className='mb-1'>{quote}</p>
-          <footer className='blockquote-footer mt-1'>{author}</footer>
-        </blockquote>
-      )}
+      {isLoading ? <LoadingQuote /> : <Quote author={author} quote={quote} />}
 
       <button
         className='btn btn-primary'
