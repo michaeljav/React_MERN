@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
-export const Hijo = /*memo*/ ({ numero, incrementar }) => {
+//memorizar el componente hijo.
+export const Hijo = memo(({ numero, incrementar }) => {
   console.log('  Me volví a generar :(  ');
 
   return (
@@ -11,4 +12,4 @@ export const Hijo = /*memo*/ ({ numero, incrementar }) => {
       {numero}
     </button>
   );
-};
+});
