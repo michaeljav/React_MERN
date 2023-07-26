@@ -6,6 +6,9 @@ button {
   margin-right: 10px;
 }
 
-a {
+/* a {
   margin-right: 5px;
+} */
+.navbar-brand {
+  margin-left: 11px;
 }
