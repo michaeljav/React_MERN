@@ -7,7 +7,7 @@ const initialState = [
 ];
 
 //funcion que cambia el estado
-const todoReducer = (state = initialState, action = {}) => {
+const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case '[TODO] add todo':
       return [...state, action.payload];
