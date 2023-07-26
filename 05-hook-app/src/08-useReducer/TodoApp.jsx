@@ -7,12 +7,19 @@ import { useTodos } from '../hooks/useTodos';
 
 export const TodoApp = () => {
   //customhooks
-  const { todos, handleDeleteTodo, onToggleTodo, handleNewTodo } = useTodos();
+  const {
+    todos,
+    todosCount,
+    pendingTodosCount,
+    handleDeleteTodo,
+    onToggleTodo,
+    handleNewTodo,
+  } = useTodos();
 
   return (
     <>
       <h1>
-        TodoApp: 10, <small>Pendientes: 2</small>
+        TodoApp: {todosCount}, <small>Pendientes: {pendingTodosCount}</small>
       </h1>
       <hr />
 

@@ -1,6 +1,12 @@
 import React, { useEffect, useReducer } from 'react';
 import { todoReducer } from '../08-useReducer/todoReducer';
 
+//inicializar el reducer con lo que tiene en el local storage
+const init = () => {
+  //si no tiene valor  pasara []
+  return JSON.parse(localStorage.getItem('todos')) || [];
+};
+
 export const useTodos = () => {
   const initialState = [
     // {
@@ -10,11 +16,6 @@ export const useTodos = () => {
     // },
   ];
 
-  //inicializar el reducer con lo que tiene en el local storage
-  const init = () => {
-    //si no tiene valor  pasara []
-    return JSON.parse(localStorage.getItem('todos')) || [];
-  };
   //reducer  inicializadora, funcion inicializadora en caso de proceso pesado
   //--El reducer (todoReducer) no se ejecuta, simplemente paso la refercencia a la funcion para que se ejecute cuando tenga que hacerlo el useReducer.
   //--funcion tercera que inicializa nuestro reducer
@@ -47,8 +48,16 @@ export const useTodos = () => {
     });
   };
 
+  // const todosCount = () => {
+  //   return todos.length;
+  // };
+  // const pendingTodosCount = () => {
+  //   return todos.filter((todo) => todo.done !== true).length;
+  // };
   return {
     todos,
+    todosCount: todos.length,
+    pendingTodosCount: todos.filter((todo) => todo.done !== true).length,
     handleNewTodo,
     handleDeleteTodo,
     onToggleTodo,
