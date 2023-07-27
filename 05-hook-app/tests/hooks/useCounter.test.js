@@ -1,5 +1,6 @@
-import { renderHook } from '@testing-library/react';
+import { renderHook, screen } from '@testing-library/react';
 import { useCounter } from '../../src/hooks/useCounter';
+import { act } from 'react-dom/test-utils';
 
 describe('Pruebas en el useCounter', () => {
   test('debe de retornar los valores por defecto', () => {
@@ -17,5 +18,43 @@ describe('Pruebas en el useCounter', () => {
     const { counter } = result.current;
 
     expect(counter).toBe(100);
+  });
+
+  test('debe de incrementar el contador', () => {
+    const { result } = renderHook(() => useCounter());
+    const { counter, increment } = result.current;
+    console.log(result);
+    // screen.debug();
+    act(() => {
+      increment(2);
+    });
+    expect(result.current.counter).toBe(12);
+  });
+
+  test('debe de decrementar el contador', () => {
+    const { result } = renderHook(() => useCounter());
+    const { counter, decrement } = result.current;
+    console.log(result);
+    // screen.debug();
+    act(() => {
+      decrement();
+    });
+    expect(result.current.counter).toBe(9);
+  });
+
+  test('debe de realizar el reset', () => {
+    const { result } = renderHook(() => useCounter());
+    const { counter, increment, reset } = result.current;
+    console.log(result);
+    // screen.debug();
+    // act(() => {
+    //   increment();
+    // });
+    // expect(result.current.counter).toBe(11);
+    act(() => {
+      increment();
+      reset();
+    });
+    expect(result.current.counter).toBe(10);
   });
 });
