@@ -24,7 +24,7 @@ describe('Pruebas en el useCounter', () => {
     const { result } = renderHook(() => useCounter());
 
     const { counter, increment } = result.current;
-    console.log(result);
+    // console.log(result);
     // screen.debug();
     act(() => {
       increment(2);
@@ -38,7 +38,7 @@ describe('Pruebas en el useCounter', () => {
   test('debe de decrementar el contador', () => {
     const { result } = renderHook(() => useCounter());
     const { counter, decrement } = result.current;
-    console.log(result);
+    // console.log(result);
     // screen.debug();
     act(() => {
       decrement();
@@ -49,7 +49,7 @@ describe('Pruebas en el useCounter', () => {
   test('debe de realizar el reset', () => {
     const { result } = renderHook(() => useCounter());
     const { counter, increment, reset } = result.current;
-    console.log(result);
+    // console.log(result);
     // screen.debug();
     // act(() => {
     //   increment();
