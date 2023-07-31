@@ -22,12 +22,16 @@ describe('Pruebas en el useCounter', () => {
 
   test('debe de incrementar el contador', () => {
     const { result } = renderHook(() => useCounter());
+
     const { counter, increment } = result.current;
     console.log(result);
     // screen.debug();
     act(() => {
       increment(2);
     });
+    //No use  counter directamente porque se crea una nueva variable y no almacena
+    //la actualizacion que se hace con el metodo increment
+    //video 167 ...ejecutar fucnion customhook
     expect(result.current.counter).toBe(12);
   });
 
