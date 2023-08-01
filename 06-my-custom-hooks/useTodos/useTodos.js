@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from 'react';
-import { todoReducer } from '../08-useReducer/todoReducer';
+import { todoReducer } from './todoReducer';
 
 //inicializar el reducer con lo que tiene en el local storage
 const init = () => {
