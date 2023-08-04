@@ -12,7 +12,11 @@ export const HeroesRoutes = () => {
           <Route path='dc' element={<DcPages />} />
 
           <Route path='search' element={<SearchPage />} />
-          <Route path='hero' element={<HeroPage />} />
+          {/* <Route path='hero' element={<HeroPage />} /> */}
+
+          {/* solo se mostraria  heropage especificamente pongo la siguiente ruta pero manualmente no es conveniente. */}
+          {/* <Route path='hero/marvel-captain' element={<HeroPage />} /> */}
+          <Route path='hero/:id' element={<HeroPage />} />
 
           <Route path='/' element={<Navigate to='/marvel' />} />
         </Routes>

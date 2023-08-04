@@ -32,7 +32,7 @@ export const HeroCard = ({
               <p className='card-text'>
                 <small className='text-muted'>{first_appearance}</small>
               </p>
-
+              {/* este link  llamara el componte hero y enviará el id */}
               <Link to={`/hero/${id}`}>Mas..</Link>
             </div>
           </div>
