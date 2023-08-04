@@ -27,7 +27,7 @@ export const HeroPage = () => {
         <img
           src={`/asserts/heroes/${id}.jpg`}
           alt={hero.superhero}
-          className='img-thumbnail'
+          className='img-thumbnail animate__animated animate__bounce'
         />
       </div>
       <div className='col-8'>

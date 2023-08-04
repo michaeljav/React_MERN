@@ -12,10 +12,10 @@ export const HeroCard = ({
 
   const charactersByHero = <p>{characters}</p>;
   return (
-    <div className='col'>
+    <div className='col animate__animated animate__bounce'>
       <div className='card'>
         <div className='row no-gutters'>
-          <div className='col-4'>
+          <div className='col-4 '>
             <img src={heroImageUrl} alt={superhero} className='card-img' />
           </div>
 
