@@ -3,6 +3,7 @@ import { HeroCard } from '../components/HeroCard';
 import { useForm } from '../../hooks/useForm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
+import { getHeroesByName } from '../helpers';
 
 export const SearchPage = () => {
   const navigate = useNavigate();
@@ -11,10 +12,12 @@ export const SearchPage = () => {
 
   //voy a desestructura solo q y si no viene envio vacio
   const { q = '' } = queryString.parse(location.search);
+  const heroes = getHeroesByName(q);
 
   // console.log(query);
+  //para que cuando refresquemos si ya hemos buscado, que el valor se mantenta el que teniamo en el query url
   const { searchText, onInputChange, onResetForm } = useForm({
-    searchText: '',
+    searchText: q,
   });
 
   const onSearchSubmit = (event) => {
@@ -58,6 +61,9 @@ export const SearchPage = () => {
             No hero with <b>{q}</b>
           </div>
 
+          {heroes.map((hero) => (
+            <HeroCard key={hero.id} {...hero} />
+          ))}
           {/* <HeroCard /> */}
         </div>
       </div>
