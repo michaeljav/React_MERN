@@ -56,10 +56,16 @@ export const SearchPage = () => {
         <div className='col-7'>
           <h4>Results</h4>
           <hr />
-          <div className='alert alert-primary'>Search a hero</div>
-          <div className='alert alert-danger'>
-            No hero with <b>{q}</b>
-          </div>
+
+          {q === '' ? (
+            <div className='alert alert-primary'>Search a hero</div>
+          ) : (
+            heroes.length === 0 && (
+              <div className='alert alert-danger'>
+                No hero with <b>{q}</b>
+              </div>
+            )
+          )}
 
           {heroes.map((hero) => (
             <HeroCard key={hero.id} {...hero} />
