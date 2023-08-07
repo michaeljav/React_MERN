@@ -15,4 +15,23 @@ describe('Pruebas en <SearchPage/>', () => {
     expect(container).toMatchSnapshot();
     screen.debug();
   });
+
+  test('debe de mostrarse A batman y el input con el valor del queryString', () => {
+    const { container } = render(
+      <MemoryRouter initialEntries={['/search?q=batman']}>
+        <SearchPage />
+      </MemoryRouter>
+    );
+
+    // screen.debug();
+    const input = screen.getByRole('textbox');
+    expect(input.value).toBe('batman');
+    screen.debug();
+
+    const img = screen.getByRole('img');
+    expect(img.src).toContain('/asserts/heroes/dc-batman.jpg');
+
+    const alert = screen.getByLabelText('alert-danger');
+    expect(alert.style.display).toBe('none');
+  });
 });

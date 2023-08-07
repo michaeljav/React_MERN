@@ -76,6 +76,7 @@ export const SearchPage = () => {
             Search a hero
           </div>
           <div
+            aria-label='alert-danger'
             className='alert alert-danger'
             style={{ display: showError ? '' : 'none' }}
           >
