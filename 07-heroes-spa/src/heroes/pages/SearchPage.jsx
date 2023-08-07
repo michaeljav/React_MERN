@@ -25,6 +25,7 @@ export const SearchPage = () => {
   const onSearchSubmit = (event) => {
     event.preventDefault();
 
+    console.log('Probando jest testing disparando este formulario');
     // if (searchText.trim().length <= 1) {
     //   return;
     // }
@@ -42,7 +43,7 @@ export const SearchPage = () => {
         <div className='col-5'>
           <h4>Searching</h4>
           <hr />
-          <form onSubmit={onSearchSubmit}>
+          <form onSubmit={onSearchSubmit} aria-label='form'>
             <input
               type='text'
               className='form-control'
