@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+
 import './styles.css';
 import { JournalApp } from './JournalApp';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <JournalApp />
+    {/* para browserrouter para que funcione el router */}
+    <BrowserRouter>
+      <JournalApp />
+    </BrowserRouter>
   </React.StrictMode>
 );
