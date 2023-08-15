@@ -18,6 +18,7 @@ export const AuthLayout = ({ children, title = '' }) => {
       }}
     >
       <Grid
+        item
         className='box-shadow'
         xs={3}
         sx={{

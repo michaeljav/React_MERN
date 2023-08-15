@@ -14,8 +14,8 @@ export const JournalPage = () => {
         saepe debitis ad maxime facere totam ab numquam labore possimus.
       </Typography> */}
       {/* Nothingselected */}
-      {/* <NothingSelectedView /> */}
-      <NoteView />
+      <NothingSelectedView />
+      {/* <NoteView /> */}
 
       <IconButton
         size='large'
