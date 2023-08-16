@@ -4,8 +4,15 @@ import React from 'react';
 import { JournalLayout } from '../../auth/layout/JournalLayout';
 import { NothingSelectedView } from '../views/NothingSelectedView';
 import { NoteView } from '../views/NoteView';
+import { startNewNote } from '../../store/journal';
+import { useDispatch } from 'react-redux';
 
 export const JournalPage = () => {
+  const dispatch = useDispatch();
+  const onClickNewNote = () => {
+    dispatch(startNewNote());
+  };
+
   return (
     <JournalLayout>
       {/* <Typography>
@@ -18,6 +25,7 @@ export const JournalPage = () => {
       {/* <NoteView /> */}
 
       <IconButton
+        onClick={onClickNewNote}
         size='large'
         sx={{
           color: 'white',
