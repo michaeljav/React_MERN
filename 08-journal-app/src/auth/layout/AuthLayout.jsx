@@ -6,6 +6,7 @@ import React from 'react';
 export const AuthLayout = ({ children, title = '' }) => {
   return (
     <Grid
+      className='animate__animated animate__faseIn animate__faster'
       container
       spacing={0}
       direction='column'
