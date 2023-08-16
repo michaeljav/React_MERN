@@ -5,27 +5,26 @@ import { JournalLayout } from '../../auth/layout/JournalLayout';
 import { NothingSelectedView } from '../views/NothingSelectedView';
 import { NoteView } from '../views/NoteView';
 import { startNewNote } from '../../store/journal';
-import { useDispatch } from 'react-redux';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 export const JournalPage = () => {
   const dispatch = useDispatch();
+  const { isSaving, active } = useSelector((state) => state.journal);
   const onClickNewNote = () => {
     dispatch(startNewNote());
   };
 
   return (
     <JournalLayout>
-      {/* <Typography>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus assumenda
-        vel quo corrupti ducimus, repellendus qui eos quasi natus perferendis
-        saepe debitis ad maxime facere totam ab numquam labore possimus.
-      </Typography> */}
-      {/* Nothingselected */}
-      <NothingSelectedView />
-      {/* <NoteView /> */}
+      {
+        // si tenemos una note activa mostramos
+        !!active ? <NoteView /> : <NothingSelectedView />
+      }
 
       <IconButton
         onClick={onClickNewNote}
+        disabled={isSaving}
         size='large'
         sx={{
           color: 'white',
