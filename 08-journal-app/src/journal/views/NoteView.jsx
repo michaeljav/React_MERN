@@ -50,7 +50,7 @@ export const NoteView = () => {
   const onFileInputChange = ({ target }) => {
     if (target.files === 0) return;
     console.log('subiendo archivos');
-    // dispatch(startLoadingFiles(target.files));
+    dispatch(startLoadingFiles(target.files));
   };
 
   const onDelete = () => {
