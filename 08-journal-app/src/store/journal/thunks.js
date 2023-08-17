@@ -5,6 +5,8 @@ import {
   savingNewNote,
   setActiveNote,
   setNotes,
+  setSaving,
+  updateNote,
 } from './journalSlice';
 import { loadNoate } from '../../helpers/loadNotes';
 
@@ -48,5 +50,23 @@ export const startLoadingNotes = () => {
     // console.l og(uid);
     const notes = await loadNoate(uid);
     dispatch(setNotes(notes));
+  };
+};
+
+export const startSaveNote = () => {
+  return async (dispatch, getState) => {
+    dispatch(setSaving());
+    const { uid } = getState().auth;
+    const { active: noteActive } = getState().journal;
+
+    const noteToFireStore = { ...noteActive };
+    delete noteToFireStore.id;
+
+    //referencia al documento en firestore
+    const docRef = doc(FirebaseStore, `${uid}/journal/notes/${noteActive.id}`);
+    //si hay cambio que no existen en el objeto noteToFireStore los campos del remoto se mantienen
+    await setDoc(docRef, noteToFireStore, { merge: true });
+    // console.log('MICHAEL noteActive ', noteActive);
+    dispatch(updateNote(noteActive));
   };
 };
