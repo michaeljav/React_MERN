@@ -1,14 +1,17 @@
-import { collection, doc, setDoc } from 'firebase/firestore/lite';
+import { collection, deleteDoc, doc, setDoc } from 'firebase/firestore/lite';
 import { FirebaseStore } from '../../firebase/config';
 import {
   addNewEmptyNote,
+  deleteNoteById,
   savingNewNote,
   setActiveNote,
   setNotes,
+  setPhotosToActiveNote,
   setSaving,
   updateNote,
 } from './journalSlice';
 import { loadNoate } from '../../helpers/loadNotes';
+import { fileUpload } from '../../helpers/fileUpload';
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
@@ -68,5 +71,41 @@ export const startSaveNote = () => {
     await setDoc(docRef, noteToFireStore, { merge: true });
     // console.log('MICHAEL noteActive ', noteActive);
     dispatch(updateNote(noteActive));
+  };
+};
+
+//Por defecto recibira
+export const startLoadingFiles = (files = []) => {
+  return async (dispatch) => {
+    //bloquear botones
+    dispatch(setSaving());
+    //Envio de una imagen
+    // const resp = await fileUpload(files[0]);
+    // console.log(resp);
+
+    const fileUploadPromises = [];
+    for (const file of files) {
+      //el metodo fileUpload devuelve una promesa ya que es async
+      fileUploadPromises.push(fileUpload(file));
+    }
+    const photosUrls = await Promise.all(fileUploadPromises);
+    // const photosUrls = fileUploadPromises;
+    // console.log(photosUrls);
+
+    dispatch(setPhotosToActiveNote(photosUrls));
+  };
+};
+
+export const startDeletingNote = () => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    const { active: noteActive } = getState().journal;
+    // console.log({ uid, noteActive });
+
+    const docRef = doc(FirebaseStore, `${uid}/journal/notes/${noteActive.id}`);
+    // const resp = await deleteDoc(docRef);
+    await deleteDoc(docRef);
+    dispatch(deleteNoteById(noteActive.id));
+    // console.log(resp);
   };
 };
