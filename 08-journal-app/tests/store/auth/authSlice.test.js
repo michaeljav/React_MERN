@@ -64,7 +64,7 @@ describe('Pruebas en el authSlice', () => {
       logout({ errorMessage })
     );
     //asi quda el estado
-    console.log(state);
+    // console.log(state);
 
     expect(state).toEqual({
       status: 'not-authenticated', //'checking','not-authenticated','authenticated'
@@ -79,7 +79,7 @@ describe('Pruebas en el authSlice', () => {
   test('debe de cambiar el estado a checking', () => {
     const state = authSlice.reducer(authenticatedState, checkingCredentials());
     //asi quda el estado
-    console.log(state);
+    // console.log(state);
 
     expect(state.status).toBe('checking');
   });
