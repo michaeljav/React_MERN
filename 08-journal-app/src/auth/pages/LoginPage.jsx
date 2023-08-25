@@ -50,7 +50,7 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout title='Login'>
-      <form onSubmit={onSubmit}>
+      <form aria-label='submit-form' onSubmit={onSubmit}>
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
@@ -72,6 +72,9 @@ export const LoginPage = () => {
               fullWidth
               name='password'
               value={password}
+              inputProps={{
+                'data-testid': 'password',
+              }}
               onChange={onInputChange}
             />
           </Grid>

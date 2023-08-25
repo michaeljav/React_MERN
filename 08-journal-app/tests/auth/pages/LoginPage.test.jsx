@@ -9,9 +9,18 @@ const { notAuthenticatedState } = require('../../fixfures/authFixtures');
 
 //obligatorio escribir mock
 const mockStartGoogleSignIn = jest.fn();
+const mockStartLoginWithEmailPassword = jest.fn();
 
 jest.mock('../../../src/store/auth/thunks', () => ({
   startGoogleSignIn: () => mockStartGoogleSignIn,
+  startLoginWithEmailPassword: ({ email, password }) => {
+    return () => mockStartLoginWithEmailPassword({ email, password });
+  },
+}));
+
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useDispatch: () => (fn) => fn(),
 }));
 
 const store = configureStore({
@@ -24,6 +33,8 @@ const store = configureStore({
 });
 
 describe('Pruebas en <LoginPage/>', () => {
+  beforeEach(() => jest.clearAllMocks());
+
   test('debe de mostrar el componente correctamente', () => {
     render(
       <Provider store={store}>
@@ -54,5 +65,37 @@ describe('Pruebas en <LoginPage/>', () => {
 
     // console.log(store.getState());
     expect(mockStartGoogleSignIn).toHaveBeenCalled();
+  });
+
+  test('submit debe de llamar startLoginWithEmailPassword ', () => {
+    const email = 'michaeljv@gmail.com';
+    const password = '123456';
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <LoginPage />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const emailField = screen.getByRole('textbox', { name: 'Email' });
+    // console.log(emailField);
+    fireEvent.change(emailField, { target: { name: 'email', value: email } });
+
+    const passwordField = screen.getByTestId('password');
+    fireEvent.change(passwordField, {
+      target: { name: 'password', value: password },
+    });
+
+    const loginForm = screen.getByLabelText('submit-form');
+
+    // screen.debug();
+    fireEvent.submit(loginForm);
+
+    expect(mockStartLoginWithEmailPassword).toHaveBeenCalledWith({
+      email: email,
+      password: password,
+    });
   });
 });
