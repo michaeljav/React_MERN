@@ -5,24 +5,11 @@ import { addHours } from 'date-fns';
 import { CalendarEvent, CalendarModal, Navbar } from '../';
 import { getMessagesES, localizer } from '../../helpers';
 import { useState } from 'react';
-import { useUiStore } from '../../hooks';
-
-const events = [
-  {
-    title: 'Cumpleanos del jefe',
-    notes: 'comprar pastel',
-    start: new Date(),
-    end: addHours(new Date(), 2),
-    bgColor: '#fafafa',
-    user: {
-      _id: '123',
-      name: 'Michael',
-    },
-  },
-];
+import { useCalendarStore, useUiStore } from '../../hooks';
 
 export const CalendarPage = () => {
   const { openDateModal } = useUiStore();
+  const { events } = useCalendarStore();
 
   const [lastView, setLastView] = useState(
     localStorage.getItem('lastView') || 'week'
