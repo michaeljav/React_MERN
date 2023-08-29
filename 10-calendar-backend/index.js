@@ -1,7 +1,8 @@
 const express = require('express');
 require('dotenv').config();
+const routerAuth = require('./routes/auth');
 
-console.log(process.env);
+// console.log(process.env);
 //create server express
 const app = express();
 
@@ -10,9 +11,11 @@ app.use(express.static('public'));
 
 //reading and parsing boady
 app.use(express.json());
-
+const router = express.Router();
 //Routers
-app.use('/api/v1/auth', require('./routes/auth'));
+app.use('/api/v1', router);
+// app.use('/api/v1/auth', require('./routes/auth'));
+router.use('/auth', routerAuth);
 
 //TODO:  auth // create, login, renew
 //TODO
