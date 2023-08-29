@@ -3,6 +3,9 @@ const express = require('express');
 const createUser = (req, res = express.reponse) => {
   const { name, email, password } = req.body;
 
+  if (name.length < 5) {
+    return res.status(400).json({ ok: false, msg: 'Invalid' });
+  }
   res.json({
     ok: true,
     msg: 'register',
