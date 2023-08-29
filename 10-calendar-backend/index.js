@@ -8,6 +8,9 @@ const app = express();
 //Directorio Publico
 app.use(express.static('public'));
 
+//reading and parsing boady
+app.use(express.json());
+
 //Routers
 app.use('/api/v1/auth', require('./routes/auth'));
 
