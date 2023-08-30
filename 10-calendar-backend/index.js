@@ -1,11 +1,15 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
 const routerAuth = require('./routes/auth');
 const { dbConnection } = require('./database/config');
 
 // console.log(process.env);
 //create server express
 const app = express();
+
+//cors
+app.use(cors());
 
 //DATA BASE
 dbConnection();
