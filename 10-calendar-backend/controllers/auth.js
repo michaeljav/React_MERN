@@ -86,9 +86,19 @@ const loginUser = async (req, res = express.reponse) => {
   }
 };
 
-const reEvaluteToken = (req, res = express.reponse) => {
+const reEvaluteToken = async (req, res = express.reponse) => {
+  // const uid = req.uid;
+  // const name = req.name;
+  const { uid, name } = req;
+
+  //generate new token
+  const token = await generateJWT(uid, name);
+
   res.status(201).json({
     ok: true,
+    // uid: uid,
+    // name: name,
+    token,
   });
 };
 
