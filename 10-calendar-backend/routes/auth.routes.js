@@ -15,7 +15,7 @@ const {
   createUser,
   loginUser,
   reEvaluteToken,
-} = require('../controllers/auth');
+} = require('../controllers/auth.controllers');
 
 router.post(
   '/new',

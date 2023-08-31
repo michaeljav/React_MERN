@@ -1,8 +1,10 @@
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
-const routerAuth = require('./routes/auth');
 const { dbConnection } = require('./database/config');
+
+const routerAuth = require('./routes/auth.routes');
+const routerEvents = require('./routes/events.routes');
 
 // console.log(process.env);
 //create server express
@@ -24,6 +26,7 @@ const router = express.Router();
 app.use('/api/v1', router);
 // app.use('/api/v1/auth', require('./routes/auth'));
 router.use('/auth', routerAuth);
+router.use('/events', routerEvents);
 
 //TODO:  auth // create, login, renew
 //TODO
