@@ -7,7 +7,7 @@ export const AppRouter = () => {
   const vari = getEnvVariables();
   console.log(vari);
 
-  const authStatus = 'authenticated'; //'not-authenticated';
+  const authStatus = 'not-authenticated'; //'checking' //'authenticated'; //'not-authenticated';
   return (
     <Routes>
       {authStatus === 'not-authenticated' ? (
