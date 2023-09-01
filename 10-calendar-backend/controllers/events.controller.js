@@ -63,8 +63,39 @@ const updateEvent = async (req, res = response) => {
     });
   }
 };
-const deleteEvent = (req, res = response) => {
-  return res.json({ ok: true, msg: 'deleteEvent' });
+const deleteEvent = async (req, res = response) => {
+  const eventId = req.params.id;
+
+  const uid = req.uid;
+  try {
+    // const events = await Event.findById(eventId).populate('user', 'name ');
+    const event = await Event.findById(eventId);
+    //if not exists
+    if (!event) {
+      return res.status(404).json({
+        ok: false,
+        msg: 'Event not found ',
+      });
+    }
+
+    if (event.user.toString() !== uid) {
+      return res.status(401).json({
+        ok: false,
+        msg: 'do not have permission ',
+      });
+    }
+
+    // event.user = req.uid;
+    await Event.findByIdAndDelete(eventId);
+
+    return res.json({ ok: true });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      ok: false,
+      msg: 'Please contact the administrator',
+    });
+  }
 };
 
 module.exports = {
