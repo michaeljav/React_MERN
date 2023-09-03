@@ -9,12 +9,12 @@ import {
   Navbar,
 } from '../';
 import { getMessagesES, localizer } from '../../helpers';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCalendarStore, useUiStore } from '../../hooks';
 
 export const CalendarPage = () => {
   const { openDateModal } = useUiStore();
-  const { events, setActiveEvent } = useCalendarStore();
+  const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
 
   const [lastView, setLastView] = useState(
     localStorage.getItem('lastView') || 'week'
@@ -46,6 +46,10 @@ export const CalendarPage = () => {
   const onViewChanged = (event) => {
     localStorage.setItem('lastView', event);
   };
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, []);
 
   return (
     <>
