@@ -45,13 +45,15 @@ export const useAuthStore = () => {
 
   const checkAuthToken = async () => {
     const token = localStorage.getItem('token');
+
     if (!token) {
       return dispatch(onLogout());
     }
 
     try {
       const { data } = await calendarApi.get('auth/renew');
-      console.log({ data });
+      console.log('MICHAEL RENEW ', { data });
+      console.log('MICHAEL RENEW OBJECT', { name: data.name, uid: data.uid });
       localStorage.setItem('token', data.token);
       localStorage.setItem('token-init-date', new Date().getTime());
       dispatch(onLogin({ name: data.name, uid: data.uid }));

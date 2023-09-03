@@ -96,8 +96,8 @@ const reEvaluteToken = async (req, res = express.reponse) => {
 
   res.status(201).json({
     ok: true,
-    // uid: uid,
-    // name: name,
+    uid: uid,
+    name: name,
     token,
   });
 };
