@@ -1,60 +1,13 @@
 # Instalación y configuracion de Jest + React Testing Library
 
+
 ## En proyectos de React + Vite
 
-1. Instalaciones:
-
 ```
-yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react
-yarn add --dev @testing-library/react @types/jest jest-environment-jsdom
+<script src="https://gist.github.com/michaeljav/83b1242143c56c9823c33e5fda812ce1.js"></script>
 ```
 
-2. Opcional: Si usamos Fetch API en el proyecto:
-
+## otro gist para configurar jest con css
 ```
-yarn add --dev whatwg-fetch
+<script src="https://gist.github.com/michaeljav/57293751e2a0f04a6f40c7d22657193b.js"></script>
 ```
-
-3. Actualizar los scripts del **package.json**
-
-```
-"scripts: {
-  ...
-  "test": "jest --watchAll"
-```
-
-4. Crear la configuración de babel **babel.config.js**
-
-```
-module.exports = {
-    presets: [
-        [ '@babel/preset-env', { targets: { esmodules: true } } ],
-        [ '@babel/preset-react', { runtime: 'automatic' } ],
-    ],
-};
-```
-
-5. Opcional, pero eventualmente necesario, crear Jest config y setup:
-
-**jest.config.js**
-
-```
-module.exports = {
-    testEnvironment: 'jest-environment-jsdom',
-    setupFiles: ['./jest.setup.js']
-	  //, moduleNameMapper: {
-  //   '^animate.css$': '<rootDir>/mocks/animate.css.js',
-  // },
-  // transformIgnorePatterns: ['./node_modules/(?!query-string)/'],
- //worked transformIgnorePatterns: ['/node_modules/(?!query-string)/'],
-}
-```
-
-**jest.setup.js**
-
-```
-// En caso de necesitar la implementación del FetchAPI
-import 'whatwg-fetch'; // <-- yarn add whatwg-fetch
-```
-
-6. Nota ojo importante ante error(ReferenceError: module is not defined in ES module scope ...): para no tener que cambiar el nombre del archivo jest.config.js a jest.config.cjs, y el archivo de babel tambien (babel.config.cjs) se quita el type:module del package json y no hace falta cambiar extension de dichos archivos.
