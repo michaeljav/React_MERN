@@ -28,6 +28,11 @@ app.use('/api/v1', router);
 router.use('/auth', routerAuth);
 router.use('/events', routerEvents);
 
+//si al  hacer un refresh en  .../auth/login para que entre aqui. y devuelva el index
+app.get('*', (req, res) => {
+  //path inicial __dirname
+  res.sendFile(__dirname + '/public/index.html');
+});
 //TODO:  auth // create, login, renew
 //TODO
 
