@@ -4,10 +4,10 @@
 ## En proyectos de React + Vite
 
 ```
-<script src="https://gist.github.com/michaeljav/83b1242143c56c9823c33e5fda812ce1.js"></script>
+https://gist.github.com/michaeljav/83b1242143c56c9823c33e5fda812ce1
 ```
 
 ## otro gist para configurar jest con css
 ```
-<script src="https://gist.github.com/michaeljav/57293751e2a0f04a6f40c7d22657193b.js"></script>
+https://gist.github.com/michaeljav/57293751e2a0f04a6f40c7d22657193b
 ```
