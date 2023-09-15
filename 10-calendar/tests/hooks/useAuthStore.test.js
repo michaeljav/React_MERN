@@ -3,7 +3,9 @@ import { authSlice } from '../../src/store';
 import { useAuthStore } from '../../src/hooks/useAuthStore';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { initialState } from '../fixtures/authState';
+import { initialState, notAuthenticatedState } from '../fixtures/authState';
+import { act } from 'react-dom/test-utils';
+import { testUserCredentials } from '../fixtures/testUser';
 
 const getMockStore = (initialState) => {
   return configureStore({
@@ -38,5 +40,32 @@ describe('Pruebas en useAuthStore ', () => {
       startLogout: expect.any(Function),
       startRegister: expect.any(Function),
     });
+  });
+
+  test('startLogin debe de realizar el login correctamente', async () => {
+    localStorage.clear();
+    const mockStore = getMockStore({ ...notAuthenticatedState });
+    const { result } = renderHook(() => useAuthStore(), {
+      wrapper: ({ children }) => (
+        <Provider store={mockStore}>{children}</Provider>
+      ),
+    });
+
+    await act(async () => {
+      await result.current.startLogin(testUserCredentials);
+    });
+
+    // console.log(result.current);
+    const { errorMessage, status, user } = result.current;
+    expect({ errorMessage, status, user }).toEqual({
+      errorMessage: undefined,
+      status: 'authenticated',
+      user: { name: 'Test User', uid: '64f6532de53c5360bdefd950' },
+    });
+
+    //tocken que se graba al loging in
+    //todo lo que se graba en el local storage termina siendo un string
+    expect(localStorage.getItem('token')).toEqual(expect.any(String));
+    expect(localStorage.getItem('token-init-date')).toEqual(expect.any(String));
   });
 });
