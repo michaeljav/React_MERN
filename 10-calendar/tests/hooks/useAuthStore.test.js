@@ -6,6 +6,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { initialState, notAuthenticatedState } from '../fixtures/authState';
 import { act } from 'react-dom/test-utils';
 import { testUserCredentials } from '../fixtures/testUser';
+import { calendarApi } from '../../src/api';
 
 const getMockStore = (initialState) => {
   return configureStore({
@@ -20,6 +21,8 @@ const getMockStore = (initialState) => {
 };
 
 describe('Pruebas en useAuthStore ', () => {
+  beforeEach(() => localStorage.clear());
+
   test('debe de resgresar los valores por defecto', () => {
     const mockStore = getMockStore({ ...initialState });
 
@@ -98,5 +101,45 @@ describe('Pruebas en useAuthStore ', () => {
 
     //espera automaticamente 5 segundo
     await waitFor(() => expect(result.current.errorMessage).toBe(undefined));
+  });
+
+  test('startRegister debe de crear un usuario', async () => {
+    const newUser = {
+      email: 'foo@bar.com',
+      password: '15464254',
+      name: 'Test User 2',
+    };
+
+    const mockStore = getMockStore({ ...notAuthenticatedState });
+    const { result } = renderHook(() => useAuthStore(), {
+      wrapper: ({ children }) => (
+        <Provider store={mockStore}>{children}</Provider>
+      ),
+    });
+
+    //pendiente del post para hacer el mock del post
+    //y debe de ser una respuesta como la hace axios "data"
+    const spy = jest.spyOn(calendarApi, 'post').mockReturnValue({
+      data: {
+        ok: true,
+        uid: '123456',
+        name: 'Test User',
+        token: 'ALGUN-TOKEN',
+      },
+    });
+
+    await act(async () => {
+      await result.current.startRegister(newUser);
+    });
+
+    const { errorMessage, status, user } = await result.current;
+    // console.log({ errorMessage, status, user });
+    expect({ errorMessage, status, user }).toEqual({
+      errorMessage: undefined,
+      status: 'authenticated',
+      user: { name: 'Test User', uid: '123456' },
+    });
+
+    spy.mockRestore();
   });
 });
