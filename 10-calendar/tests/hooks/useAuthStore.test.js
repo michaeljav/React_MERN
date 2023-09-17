@@ -142,4 +142,25 @@ describe('Pruebas en useAuthStore ', () => {
 
     spy.mockRestore();
   });
+
+  test('startRegister debe fallar la creacion de usuario', async () => {
+    const mockStore = getMockStore({ ...notAuthenticatedState });
+    const { result } = renderHook(() => useAuthStore(), {
+      wrapper: ({ children }) => (
+        <Provider store={mockStore}>{children}</Provider>
+      ),
+    });
+
+    await act(async () => {
+      await result.current.startRegister(testUserCredentials);
+    });
+
+    const { errorMessage, status, user } = await result.current;
+    // console.log({ errorMessage, status, user });
+    expect({ errorMessage, status, user }).toEqual({
+      errorMessage: 'User already exists',
+      status: 'not-authenticated',
+      user: {},
+    });
+  });
 });
