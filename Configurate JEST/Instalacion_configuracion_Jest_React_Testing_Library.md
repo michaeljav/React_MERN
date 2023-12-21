@@ -1,6 +1,6 @@
 # Instalación y configuracion de Jest + React Testing Library
 
-## otro gist para configurar jest pnpm vite
+## Gist para configurar jest pnpm vite
 
 [pnpm vite react typescript jest configuacion](https://gist.github.com/michaeljav/1a7fdfffd34bd1d9719a8efbde8db431)
 
